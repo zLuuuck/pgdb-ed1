@@ -29,3 +29,53 @@ CREATE TABLE wallet.Cliente (
 GO
 
 
+CREATE TABLE wallet.Carteira (
+    IdCarteira INT IDENTITY(1,1) NOT NULL,
+    Endereco VARCHAR(50) NOT NULL,
+    Saldo DECIMAL(18,8) NOT NULL,
+    IdCliente INT NOT NULL,
+    CodigoMoeda CHAR(3) NOT NULL,
+
+    CONSTRAINT PK_Carteira PRIMARY KEY (IdCarteira),
+
+    CONSTRAINT FK_Carteira_Cliente
+        FOREIGN KEY (IdCliente)
+        REFERENCES wallet.Cliente (IdCliente),
+
+    CONSTRAINT FK_Carteira_Moeda
+        FOREIGN KEY (CodigoMoeda)
+        REFERENCES wallet.Moeda (CodigoMoeda)
+);
+GO
+
+
+CREATE TABLE wallet.Cotacao (
+    IdCotacao INT IDENTITY(1,1) NOT NULL,
+    PrecoUSD DECIMAL(18,2) NOT NULL,
+    DataCotacao DATETIME2,
+    CodigoMoeda CHAR(3) NOT NULL,
+
+    CONSTRAINT PK_Cotacao PRIMARY KEY (IdCotacao),
+
+    CONSTRAINT FK_Cotacao_Moeda
+        FOREIGN KEY (CodigoMoeda)
+        REFERENCES wallet.Moeda (CodigoMoeda)
+);
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
