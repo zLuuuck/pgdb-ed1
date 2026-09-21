@@ -10,7 +10,7 @@ CREATE SCHEMA wallet;
 GO
 
 
--- CRIANDO TABELA MOEDA
+-- CRIANDO TABELA MOEDA                
 CREATE TABLE wallet.Moeda (
     CodigoMoeda CHAR(3) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
@@ -21,7 +21,17 @@ CREATE TABLE wallet.Moeda (
 GO
 
 
--- CIRANDO TABELA CLIENTE
+-- CRIANDO TABELA CORRETORA
+CREATE TABLE wallet.Corretora ( 
+    CodigoCorretora INT IDENTITY(1,1) NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+ 
+    CONSTRAINT PK_Corretora PRIMARY KEY (CodigoCorretora)
+); 
+GO
+
+
+-- CRIANDO TABELA CLIENTE
 CREATE TABLE wallet.Cliente (
     IdCliente INT IDENTITY(1,1) NOT NULL,
     Nome VARCHAR(100) NOT NULL,
@@ -37,33 +47,52 @@ GO
 CREATE TABLE wallet.Carteira (
     IdCarteira INT IDENTITY(1,1) NOT NULL,
     Endereco VARCHAR(50) NOT NULL,
-    Saldo DECIMAL(18,8) NOT NULL,
     IdCliente INT NOT NULL,
-    CodigoMoeda CHAR(3) NOT NULL,
-
+    CodigoCorretora INT NOT NULL,
+ 
     CONSTRAINT PK_Carteira PRIMARY KEY (IdCarteira),
-
+ 
     CONSTRAINT FK_Carteira_Cliente
         FOREIGN KEY (IdCliente)
         REFERENCES wallet.Cliente (IdCliente),
+ 
+    CONSTRAINT FK_Carteira_Corretora
+        FOREIGN KEY (CodigoCorretora)
+        REFERENCES wallet.Corretora (CodigoCorretora)
+);
+GO
 
-    CONSTRAINT FK_Carteira_Moeda
+
+-- CRIANDO TABELA ITEMCARTEIRA
+CREATE TABLE wallet.ItemCarteira (
+    IdItemCarteira INT IDENTITY(1,1) NOT NULL,
+    IdCarteira INT NOT NULL,
+    CodigoMoeda CHAR(3) NOT NULL,
+    Quantidade DECIMAL(18,8) NOT NULL,
+
+    CONSTRAINT PK_ItemCarteira PRIMARY KEY (IdItemCarteira),
+
+    CONSTRAINT FK_ItemCarteira_Carteira
+        FOREIGN KEY (IdCarteira)
+        REFERENCES wallet.Carteira (IdCarteira),
+
+    CONSTRAINT FK_ItemCarteira_Moeda
         FOREIGN KEY (CodigoMoeda)
         REFERENCES wallet.Moeda (CodigoMoeda)
 );
 GO
 
 
--- CRIANDO TABELA COTACAO
-CREATE TABLE wallet.Cotacao (
-    IdCotacao INT IDENTITY(1,1) NOT NULL,
-    PrecoUSD DECIMAL(18,2) NOT NULL,
-    DataCotacao DATETIME2,
+-- CRIANDO TABELA PARESMOEDAS
+CREATE TABLE wallet.ParesMoedas (
+    IdPar INT IDENTITY(1,1) NOT NULL,
     CodigoMoeda CHAR(3) NOT NULL,
+    Par CHAR(7) NOT NULL,
+    Valor DECIMAL(18,2) NOT NULL,
 
-    CONSTRAINT PK_Cotacao PRIMARY KEY (IdCotacao),
+    CONSTRAINT PK_ParesMoedas PRIMARY KEY (IdPar),
 
-    CONSTRAINT FK_Cotacao_Moeda
+    CONSTRAINT FK_ParesMoedas_Moeda
         FOREIGN KEY (CodigoMoeda)
         REFERENCES wallet.Moeda (CodigoMoeda)
 );
@@ -75,14 +104,21 @@ CREATE INDEX IX_Carteira_IdCliente
 	ON wallet.Carteira (IdCliente);
 GO
 
-CREATE INDEX IX_Carteira_CodigoMoeda
-	ON wallet.Carteira (CodigoMoeda);
+CREATE INDEX IX_Carteira_CodigoCorretora
+	ON wallet.Carteira (CodigoCorretora);
 GO
 
-CREATE INDEX IX_Cotacao_CodigoMoeda
-	ON wallet.Cotacao (CodigoMoeda);
+CREATE INDEX IX_ItemCarteira_IdCarteira
+	ON wallet.ItemCarteira (IdCarteira);
 GO
 
+CREATE INDEX IX_ItemCarteira_CodigoMoeda
+	ON wallet.ItemCarteira (CodigoMoeda);
+GO
+
+CREATE INDEX IX_ParesMoedas_CodigoMoeda
+	ON wallet.ParesMoedas (CodigoMoeda);
+GO
 
 
 
