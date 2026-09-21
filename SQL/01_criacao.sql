@@ -1,3 +1,4 @@
+-- CRIAÇÃO DO BANCO
 IF DB_ID('CarteiraVirtual') IS NULL
     CREATE DATABASE CarteiraVirtual;
 GO
@@ -5,9 +6,12 @@ GO
 USE CarteiraVirtual;
 GO
 
+-- CRIAÇÃO DO SCHEMA
 CREATE SCHEMA wallet;
 GO
 
+
+-- CRIANDO TABELA MOEDA
 CREATE TABLE wallet.Moeda (
     CodigoMoeda CHAR(3) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
@@ -17,6 +21,8 @@ CREATE TABLE wallet.Moeda (
 );
 GO
 
+
+-- CIRANDO TABELA CLIENTE
 CREATE TABLE wallet.Cliente (
     IdCliente INT IDENTITY(1,1) NOT NULL,
     Nome VARCHAR(100) NOT NULL,
@@ -29,6 +35,7 @@ CREATE TABLE wallet.Cliente (
 GO
 
 
+-- CRIANDO TABELA CARTEIRA
 CREATE TABLE wallet.Carteira (
     IdCarteira INT IDENTITY(1,1) NOT NULL,
     Endereco VARCHAR(50) NOT NULL,
@@ -49,6 +56,7 @@ CREATE TABLE wallet.Carteira (
 GO
 
 
+-- CRIANDO TABELA COTACAO
 CREATE TABLE wallet.Cotacao (
     IdCotacao INT IDENTITY(1,1) NOT NULL,
     PrecoUSD DECIMAL(18,2) NOT NULL,
@@ -63,6 +71,18 @@ CREATE TABLE wallet.Cotacao (
 );
 GO
 
+
+CREATE INDEX IX_Carteira_IdCliente
+	ON wallet.Carteira (IdCliente);
+GO
+
+CREATE INDEX IX_Carteira_CodigoMoeda
+	ON wallet.Carteira (CodigoMoeda);
+GO
+
+CREATE INDEX IX_Cotacao_CodigoMoeda
+	ON wallet.Cotacao (CodigoMoeda);
+GO
 
 
 
