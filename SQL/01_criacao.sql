@@ -36,9 +36,15 @@ CREATE TABLE wallet.Cliente (
     IdCliente INT IDENTITY(1,1) NOT NULL,
     Nome VARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
+    Celular VARCHAR(20) NOT NULL,
     PassHash CHAR(32) NOT NULL,
+    MoedaPrincipal CHAR(3) NOT NULL,
 
-    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente)
+    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente),
+
+    CONSTRAINT FK_Cliente_Moeda
+        FOREIGN KEY (MoedaPrincipal)
+        REFERENCES wallet.Moeda (CodigoMoeda)
 );
 GO
 
@@ -86,14 +92,18 @@ GO
 -- CRIANDO TABELA PARESMOEDAS
 CREATE TABLE wallet.ParesMoedas (
     IdPar INT IDENTITY(1,1) NOT NULL,
-    CodigoMoeda CHAR(3) NOT NULL,
-    Par CHAR(7) NOT NULL,
+    CodigoMoedaBase CHAR(3) NOT NULL,
+    CodigoMoedaCotacao CHAR(3) NOT NULL,
     Valor DECIMAL(18,2) NOT NULL,
 
     CONSTRAINT PK_ParesMoedas PRIMARY KEY (IdPar),
 
-    CONSTRAINT FK_ParesMoedas_Moeda
-        FOREIGN KEY (CodigoMoeda)
+    CONSTRAINT FK_ParesMoedas_Base
+        FOREIGN KEY (CodigoMoedaBase)
+        REFERENCES wallet.Moeda (CodigoMoeda),
+
+    CONSTRAINT FK_ParesMoedas_Cotacao
+        FOREIGN KEY (CodigoMoedaCotacao)
         REFERENCES wallet.Moeda (CodigoMoeda)
 );
 GO
@@ -101,26 +111,28 @@ GO
 
 -- INDICES
 CREATE INDEX IX_Carteira_IdCliente
-	ON wallet.Carteira (IdCliente);
+    ON wallet.Carteira (IdCliente);
 GO
 
 CREATE INDEX IX_Carteira_CodigoCorretora
-	ON wallet.Carteira (CodigoCorretora);
+    ON wallet.Carteira (CodigoCorretora);
 GO
 
 CREATE INDEX IX_ItemCarteira_IdCarteira
-	ON wallet.ItemCarteira (IdCarteira);
+    ON wallet.ItemCarteira (IdCarteira);
 GO
 
 CREATE INDEX IX_ItemCarteira_CodigoMoeda
-	ON wallet.ItemCarteira (CodigoMoeda);
+    ON wallet.ItemCarteira (CodigoMoeda);
 GO
 
-CREATE INDEX IX_ParesMoedas_CodigoMoeda
-	ON wallet.ParesMoedas (CodigoMoeda);
+CREATE INDEX IX_ParesMoedas_Base
+    ON wallet.ParesMoedas (CodigoMoedaBase);
 GO
 
-
+CREATE INDEX IX_ParesMoedas_Cotacao
+    ON wallet.ParesMoedas (CodigoMoedaCotacao);
+GO
 
 
 
