@@ -1,6 +1,5 @@
 -- CRIAÇÃO DO BANCO
-IF DB_ID('CarteiraVirtual') IS NULL
-    CREATE DATABASE CarteiraVirtual;
+CREATE DATABASE CarteiraVirtual;
 GO
 
 USE CarteiraVirtual;
@@ -29,8 +28,7 @@ CREATE TABLE wallet.Cliente (
     Email VARCHAR(100) NOT NULL,
     PassHash CHAR(32) NOT NULL,
 
-    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente),
-    CONSTRAINT UQ_Cliente_Email UNIQUE (Email)
+    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente)
 );
 GO
 
@@ -72,6 +70,7 @@ CREATE TABLE wallet.Cotacao (
 GO
 
 
+-- INDICES
 CREATE INDEX IX_Carteira_IdCliente
 	ON wallet.Carteira (IdCliente);
 GO
