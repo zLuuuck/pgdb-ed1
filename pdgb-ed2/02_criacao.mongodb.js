@@ -12,7 +12,6 @@
 // Doações e necessidades são feitas sempre no endereço do usuário e as
 // tratativas acontecem via WhatsApp (por isso o Phone fica em Usuarios).
 //
-// O script pode ser executado várias vezes: ele recria as coleções do zero.
 // =============================================================================
 
 // -----------------------------------------------------------------------------
