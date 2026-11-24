@@ -3,10 +3,10 @@
 // Criação da Base de Dados NoSQL (MongoDB) - Coleta de Doações Humanitárias
 //
 // Integrantes da equipe:
-//   - <nome 1>
-//   - <nome 2>
-//   - <nome 3>
-//   - <nome 4>
+//   - Caio Federico Esquivel Lovera Arze
+//   - Douglas Clayton Da Silva
+//   - Fernando Bach
+//   - Lucas Toterol Rodrigues
 //
 // Papéis: Doador, Recebedor e Coletor (todos na coleção Usuarios, campo Tipo).
 // Doações e necessidades são feitas sempre no endereço do usuário e as
