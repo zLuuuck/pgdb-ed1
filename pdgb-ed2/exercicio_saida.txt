@@ -1,0 +1,305 @@
+Q1 - documentos em STOCKS: 20
+[
+  {
+    Symbol: 'AAPL',
+    Name: 'Apple Inc',
+    Date: ISODate('2025-11-17T00:00:00.000Z'),
+    Open: 268.93,
+    High: 272.8,
+    Low: 266.7,
+    Close: 268.92,
+    Volume: 18615738
+  },
+  {
+    Symbol: 'MSFT',
+    Name: 'Microsoft Corporation',
+    Date: ISODate('2025-11-17T00:00:00.000Z'),
+    Open: 508,
+    High: 512.47,
+    Low: 505.6,
+    Close: 510.35,
+    Volume: 6536794
+  },
+  {
+    Symbol: 'GOOGL',
+    Name: 'Alphabet Inc',
+    Date: ISODate('2025-11-17T00:00:00.000Z'),
+    Open: 285.54,
+    High: 293.86,
+    Low: 283.31,
+    Close: 288.35,
+    Volume: 32068378
+  }
+]
+Q2 - documentos em WALLET: 13
+[
+  {
+    client: 1,
+    symbol: 'AAPL',
+    quantity: 10,
+    price: 268.92
+  },
+  {
+    client: 1,
+    symbol: 'MSFT',
+    quantity: 22,
+    price: 510.35
+  },
+  {
+    client: 1,
+    symbol: 'GOOGL',
+    quantity: 5,
+    price: 288.35
+  },
+  {
+    client: 1,
+    symbol: 'AMZN',
+    quantity: 19,
+    price: 233.53
+  },
+  {
+    client: 1,
+    symbol: 'META',
+    quantity: 8,
+    price: 607.11
+  },
+  {
+    client: 2,
+    symbol: 'AAPL',
+    quantity: 11,
+    price: 268.92
+  },
+  {
+    client: 2,
+    symbol: 'ORCL',
+    quantity: 40,
+    price: 220.35
+  },
+  {
+    client: 2,
+    symbol: 'GOOGL',
+    quantity: 25,
+    price: 288.35
+  },
+  {
+    client: 3,
+    symbol: 'NVDA',
+    quantity: 100,
+    price: 187.67
+  },
+  {
+    client: 3,
+    symbol: 'IBM',
+    quantity: 130,
+    price: 301.1
+  },
+  {
+    client: 3,
+    symbol: 'AAPL',
+    quantity: 135,
+    price: 288.35
+  },
+  {
+    client: 4,
+    symbol: 'TXN',
+    quantity: 100,
+    price: 157.97
+  },
+  {
+    client: 5,
+    symbol: 'AVGO',
+    quantity: 50,
+    price: 346.48
+  }
+]
+Q3 - valor total da carteira por cliente
+[
+  {
+    client: 1,
+    totalCarteira: 24652.6
+  },
+  {
+    client: 2,
+    totalCarteira: 18980.87
+  },
+  {
+    client: 3,
+    totalCarteira: 96837.25
+  },
+  {
+    client: 4,
+    totalCarteira: 15797
+  },
+  {
+    client: 5,
+    totalCarteira: 17324
+  }
+]
+Q4 - WALLET JOIN STOCKS via $lookup
+[
+  {
+    client: 1,
+    symbol: 'AAPL',
+    quantity: 10,
+    empresa: 'Apple Inc',
+    precoCompra: 268.92,
+    fechamento: 268.92,
+    valorAtual: 2689.2
+  },
+  {
+    client: 1,
+    symbol: 'AMZN',
+    quantity: 19,
+    empresa: 'Amazon.com Inc',
+    precoCompra: 233.53,
+    fechamento: 233.53,
+    valorAtual: 4437.07
+  },
+  {
+    client: 1,
+    symbol: 'GOOGL',
+    quantity: 5,
+    empresa: 'Alphabet Inc',
+    precoCompra: 288.35,
+    fechamento: 288.35,
+    valorAtual: 1441.75
+  },
+  {
+    client: 1,
+    symbol: 'META',
+    quantity: 8,
+    empresa: 'Meta Platforms Inc',
+    precoCompra: 607.11,
+    fechamento: 607.11,
+    valorAtual: 4856.88
+  },
+  {
+    client: 1,
+    symbol: 'MSFT',
+    quantity: 22,
+    empresa: 'Microsoft Corporation',
+    precoCompra: 510.35,
+    fechamento: 510.35,
+    valorAtual: 11227.7
+  },
+  {
+    client: 2,
+    symbol: 'AAPL',
+    quantity: 11,
+    empresa: 'Apple Inc',
+    precoCompra: 268.92,
+    fechamento: 268.92,
+    valorAtual: 2958.12
+  },
+  {
+    client: 2,
+    symbol: 'GOOGL',
+    quantity: 25,
+    empresa: 'Alphabet Inc',
+    precoCompra: 288.35,
+    fechamento: 288.35,
+    valorAtual: 7208.75
+  },
+  {
+    client: 2,
+    symbol: 'ORCL',
+    quantity: 40,
+    empresa: 'Oracle Corp',
+    precoCompra: 220.35,
+    fechamento: 220.35,
+    valorAtual: 8814
+  },
+  {
+    client: 3,
+    symbol: 'AAPL',
+    quantity: 135,
+    empresa: 'Apple Inc',
+    precoCompra: 288.35,
+    fechamento: 268.92,
+    valorAtual: 36304.2
+  },
+  {
+    client: 3,
+    symbol: 'IBM',
+    quantity: 130,
+    empresa: 'International Business Machines',
+    precoCompra: 301.1,
+    fechamento: 301.1,
+    valorAtual: 39143
+  },
+  {
+    client: 3,
+    symbol: 'NVDA',
+    quantity: 100,
+    empresa: 'NVIDIA Corp',
+    precoCompra: 187.67,
+    fechamento: 187.67,
+    valorAtual: 18767
+  },
+  {
+    client: 4,
+    symbol: 'TXN',
+    quantity: 100,
+    empresa: 'Texas Instruments Inc',
+    precoCompra: 157.97,
+    fechamento: 157.97,
+    valorAtual: 15797
+  },
+  {
+    client: 5,
+    symbol: 'AVGO',
+    quantity: 50,
+    empresa: 'Broadcom Inc',
+    precoCompra: 346.48,
+    fechamento: 346.48,
+    valorAtual: 17324
+  }
+]
+Q5 - pipeline: top 5 maiores variacoes do dia (volume > 5 mi)
+[
+  {
+    Symbol: 'TSLA',
+    Name: 'Tesla Inc',
+    Open: 399.06,
+    Close: 419.74,
+    Volume: 55149723,
+    variacaoPct: 5.18,
+    amplitude: 26.38
+  },
+  {
+    Symbol: 'AVGO',
+    Name: 'Broadcom Inc',
+    Open: 340.47,
+    Close: 346.48,
+    Volume: 5650524,
+    variacaoPct: 1.77,
+    amplitude: 13.76
+  },
+  {
+    Symbol: 'CSCO',
+    Name: 'Cisco Systems Inc',
+    Open: 77.98,
+    Close: 79.27,
+    Volume: 11060147,
+    variacaoPct: 1.65,
+    amplitude: 1.82
+  },
+  {
+    Symbol: 'ORCL',
+    Name: 'Oracle Corp',
+    Open: 217.24,
+    Close: 220.35,
+    Volume: 7365289,
+    variacaoPct: 1.43,
+    amplitude: 8.11
+  },
+  {
+    Symbol: 'PLTR',
+    Name: 'Palantir Technologies Inc',
+    Open: 170.73,
+    Close: 173.13,
+    Volume: 25262580,
+    variacaoPct: 1.41,
+    amplitude: 6.32
+  }
+]

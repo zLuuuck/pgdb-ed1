@@ -1,0 +1,458 @@
+
+=== 4.1 Dados de COLETA com endereços (coletor, local de retirada e local de entrega) ===
+[
+  {
+    DataColeta: ISODate('2026-11-05T09:00:00.000Z'),
+    DataEntrega: ISODate('2026-11-05T11:30:00.000Z'),
+    IdentificadorNecessidade: 1,
+    IdentificadorDoacao: 1,
+    Coletor: 'Rafael Martins',
+    TelefoneColetor: '(41) 99933-3007',
+    Retirada: {
+      Doador: 'Mariana Souza',
+      Endereco: {
+        Rua: 'Rua XV de Novembro, 1200',
+        Complemento: 'Apto 51',
+        CEP: '80020-310',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-1001'
+      }
+    },
+    Entrega: {
+      Recebedor: 'Associação Esperança',
+      Endereco: {
+        Rua: 'Rua Pedro Gusso, 2500',
+        Complemento: 'Sede',
+        CEP: '81310-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-2004'
+      }
+    }
+  },
+  {
+    DataColeta: ISODate('2026-11-06T10:00:00.000Z'),
+    DataEntrega: ISODate('2026-11-06T12:00:00.000Z'),
+    IdentificadorNecessidade: 2,
+    IdentificadorDoacao: 2,
+    Coletor: 'Beatriz Nogueira',
+    TelefoneColetor: '(41) 99933-3008',
+    Retirada: {
+      Doador: 'Carlos Eduardo Lima',
+      Endereco: {
+        Rua: 'Av. Sete de Setembro, 3300',
+        Complemento: 'Casa',
+        CEP: '80230-010',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-1002'
+      }
+    },
+    Entrega: {
+      Recebedor: 'Lar Santa Clara',
+      Endereco: {
+        Rua: 'Rua Itacolomi, 410',
+        Complemento: '',
+        CEP: '82030-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-2005'
+      }
+    }
+  },
+  {
+    DataColeta: ISODate('2026-11-07T14:00:00.000Z'),
+    DataEntrega: ISODate('2026-11-07T15:30:00.000Z'),
+    IdentificadorNecessidade: 3,
+    IdentificadorDoacao: 3,
+    Coletor: 'Thiago Ribeiro',
+    TelefoneColetor: '(41) 99933-3009',
+    Retirada: {
+      Doador: 'Fernanda Alves',
+      Endereco: {
+        Rua: 'Rua Padre Anchieta, 850',
+        Complemento: 'Bloco B, apto 12',
+        CEP: '80730-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-1003'
+      }
+    },
+    Entrega: {
+      Recebedor: 'Josefa Pereira',
+      Endereco: {
+        Rua: 'Rua Jaime Reis, 77',
+        Complemento: 'Fundos',
+        CEP: '81650-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-2006'
+      }
+    }
+  },
+  {
+    DataColeta: ISODate('2026-11-08T09:30:00.000Z'),
+    DataEntrega: ISODate('2026-11-08T11:00:00.000Z'),
+    IdentificadorNecessidade: 4,
+    IdentificadorDoacao: 4,
+    Coletor: 'Rafael Martins',
+    TelefoneColetor: '(41) 99933-3007',
+    Retirada: {
+      Doador: 'Mariana Souza',
+      Endereco: {
+        Rua: 'Rua XV de Novembro, 1200',
+        Complemento: 'Apto 51',
+        CEP: '80020-310',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-1001'
+      }
+    },
+    Entrega: {
+      Recebedor: 'Associação Esperança',
+      Endereco: {
+        Rua: 'Rua Pedro Gusso, 2500',
+        Complemento: 'Sede',
+        CEP: '81310-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-2004'
+      }
+    }
+  },
+  {
+    DataColeta: ISODate('2026-11-09T16:00:00.000Z'),
+    DataEntrega: null,
+    IdentificadorNecessidade: 5,
+    IdentificadorDoacao: 5,
+    Coletor: 'Beatriz Nogueira',
+    TelefoneColetor: '(41) 99933-3008',
+    Retirada: {
+      Doador: 'Fernanda Alves',
+      Endereco: {
+        Rua: 'Rua Padre Anchieta, 850',
+        Complemento: 'Bloco B, apto 12',
+        CEP: '80730-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-1003'
+      }
+    },
+    Entrega: {
+      Recebedor: 'Lar Santa Clara',
+      Endereco: {
+        Rua: 'Rua Itacolomi, 410',
+        Complemento: '',
+        CEP: '82030-000',
+        Cidade: 'Curitiba',
+        Estado: 'PR',
+        Telefone: '(41) 3222-2005'
+      }
+    }
+  }
+]
+
+=== 4.2 Dados de NECESSIDADE de doação incluindo endereços ===
+[
+  {
+    _id: 1,
+    Data: ISODate('2026-11-01T10:00:00.000Z'),
+    Descricao: 'Cestas básicas (arroz, feijão, óleo, macarrão)',
+    Quantidade: 20,
+    TipoDoacao: 'Mantimento',
+    Recebedor: 'Associação Esperança',
+    Phone: '(41) 99922-2004',
+    Endereco: {
+      Rua: 'Rua Pedro Gusso, 2500',
+      Complemento: 'Sede',
+      CEP: '81310-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2004'
+    },
+    Coordenadas: {
+      Latitude: -25.5073,
+      Longitude: -49.3149
+    }
+  },
+  {
+    _id: 2,
+    Data: ISODate('2026-11-01T14:30:00.000Z'),
+    Descricao: 'Garrafões de água mineral 20 litros',
+    Quantidade: 30,
+    TipoDoacao: 'Água',
+    Recebedor: 'Lar Santa Clara',
+    Phone: '(41) 99922-2005',
+    Endereco: {
+      Rua: 'Rua Itacolomi, 410',
+      Complemento: '',
+      CEP: '82030-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2005'
+    },
+    Coordenadas: {
+      Latitude: -25.4602,
+      Longitude: -49.2113
+    }
+  },
+  {
+    _id: 3,
+    Data: ISODate('2026-11-02T09:15:00.000Z'),
+    Descricao: 'Medicamentos para pressão alta e analgésicos',
+    Quantidade: 10,
+    TipoDoacao: 'Remédio',
+    Recebedor: 'Josefa Pereira',
+    Phone: '(41) 99922-2006',
+    Endereco: {
+      Rua: 'Rua Jaime Reis, 77',
+      Complemento: 'Fundos',
+      CEP: '81650-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2006'
+    },
+    Coordenadas: {
+      Latitude: -25.5399,
+      Longitude: -49.2662
+    }
+  },
+  {
+    _id: 4,
+    Data: ISODate('2026-11-03T11:00:00.000Z'),
+    Descricao: 'Agasalhos e cobertores para o inverno',
+    Quantidade: 15,
+    TipoDoacao: 'Roupas',
+    Recebedor: 'Associação Esperança',
+    Phone: '(41) 99922-2004',
+    Endereco: {
+      Rua: 'Rua Pedro Gusso, 2500',
+      Complemento: 'Sede',
+      CEP: '81310-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2004'
+    },
+    Coordenadas: {
+      Latitude: -25.5073,
+      Longitude: -49.3149
+    }
+  },
+  {
+    _id: 5,
+    Data: ISODate('2026-11-04T16:45:00.000Z'),
+    Descricao: 'Alimentos não perecíveis para o lar de idosos',
+    Quantidade: 10,
+    TipoDoacao: 'Mantimento',
+    Recebedor: 'Lar Santa Clara',
+    Phone: '(41) 99922-2005',
+    Endereco: {
+      Rua: 'Rua Itacolomi, 410',
+      Complemento: '',
+      CEP: '82030-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2005'
+    },
+    Coordenadas: {
+      Latitude: -25.4602,
+      Longitude: -49.2113
+    }
+  },
+  {
+    _id: 6,
+    Data: ISODate('2026-11-10T08:30:00.000Z'),
+    Descricao: 'Fraldas geriátricas e roupas de cama',
+    Quantidade: 8,
+    TipoDoacao: 'Roupas',
+    Recebedor: 'Josefa Pereira',
+    Phone: '(41) 99922-2006',
+    Endereco: {
+      Rua: 'Rua Jaime Reis, 77',
+      Complemento: 'Fundos',
+      CEP: '81650-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-2006'
+    },
+    Coordenadas: {
+      Latitude: -25.5399,
+      Longitude: -49.2662
+    }
+  }
+]
+
+=== 4.3 Dados de DOAÇÃO incluindo endereços ===
+[
+  {
+    _id: 1,
+    Data: ISODate('2026-11-02T08:00:00.000Z'),
+    Descricao: '25 cestas básicas completas',
+    Quantidade: 25,
+    TipoDoacao: 'Mantimento',
+    Doador: 'Mariana Souza',
+    Phone: '(41) 99911-1001',
+    Endereco: {
+      Rua: 'Rua XV de Novembro, 1200',
+      Complemento: 'Apto 51',
+      CEP: '80020-310',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-1001'
+    },
+    Coordenadas: {
+      Latitude: -25.4284,
+      Longitude: -49.2733
+    }
+  },
+  {
+    _id: 2,
+    Data: ISODate('2026-11-02T13:20:00.000Z'),
+    Descricao: 'Garrafões de água mineral 20 litros',
+    Quantidade: 30,
+    TipoDoacao: 'Água',
+    Doador: 'Carlos Eduardo Lima',
+    Phone: '(41) 99911-1002',
+    Endereco: {
+      Rua: 'Av. Sete de Setembro, 3300',
+      Complemento: 'Casa',
+      CEP: '80230-010',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-1002'
+    },
+    Coordenadas: {
+      Latitude: -25.4411,
+      Longitude: -49.2769
+    }
+  },
+  {
+    _id: 3,
+    Data: ISODate('2026-11-03T10:10:00.000Z'),
+    Descricao: 'Caixas de remédios lacradas, dentro da validade',
+    Quantidade: 10,
+    TipoDoacao: 'Remédio',
+    Doador: 'Fernanda Alves',
+    Phone: '(41) 99911-1003',
+    Endereco: {
+      Rua: 'Rua Padre Anchieta, 850',
+      Complemento: 'Bloco B, apto 12',
+      CEP: '80730-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-1003'
+    },
+    Coordenadas: {
+      Latitude: -25.3935,
+      Longitude: -49.2321
+    }
+  },
+  {
+    _id: 4,
+    Data: ISODate('2026-11-04T09:40:00.000Z'),
+    Descricao: 'Agasalhos, casacos e cobertores limpos',
+    Quantidade: 20,
+    TipoDoacao: 'Roupas',
+    Doador: 'Mariana Souza',
+    Phone: '(41) 99911-1001',
+    Endereco: {
+      Rua: 'Rua XV de Novembro, 1200',
+      Complemento: 'Apto 51',
+      CEP: '80020-310',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-1001'
+    },
+    Coordenadas: {
+      Latitude: -25.4284,
+      Longitude: -49.2733
+    }
+  },
+  {
+    _id: 5,
+    Data: ISODate('2026-11-05T15:00:00.000Z'),
+    Descricao: 'Alimentos não perecíveis variados',
+    Quantidade: 12,
+    TipoDoacao: 'Mantimento',
+    Doador: 'Fernanda Alves',
+    Phone: '(41) 99911-1003',
+    Endereco: {
+      Rua: 'Rua Padre Anchieta, 850',
+      Complemento: 'Bloco B, apto 12',
+      CEP: '80730-000',
+      Cidade: 'Curitiba',
+      Estado: 'PR',
+      Telefone: '(41) 3222-1003'
+    },
+    Coordenadas: {
+      Latitude: -25.3935,
+      Longitude: -49.2321
+    }
+  }
+]
+
+=== 4.4 Extra: quantidade total doada e necessitada por tipo de doação ===
+[
+  {
+    TipoDoacao: 'Mantimento',
+    TotalDoado: 37,
+    TotalNecessario: 30
+  },
+  {
+    TipoDoacao: 'Água',
+    TotalDoado: 30,
+    TotalNecessario: 30
+  },
+  {
+    TipoDoacao: 'Remédio',
+    TotalDoado: 10,
+    TotalNecessario: 10
+  },
+  {
+    TipoDoacao: 'Roupas',
+    TotalDoado: 20,
+    TotalNecessario: 23
+  }
+]
+
+=== 4.5 Extra: coletas pendentes de entrega (retiradas, mas ainda não entregues) ===
+[
+  {
+    _id: {
+      IdentificadorNecessidade: 5,
+      IdentificadorDoacao: 5
+    },
+    IdentificadorUsuario: 8,
+    DataColeta: ISODate('2026-11-09T16:00:00.000Z'),
+    DataEntrega: null
+  }
+]
+
+=== 4.6 Extra: necessidades ainda sem coleta registrada ===
+[
+  {
+    _id: 6,
+    IdentificadorUsuario: 6,
+    Data: ISODate('2026-11-10T08:30:00.000Z'),
+    Descricao: 'Fraldas geriátricas e roupas de cama',
+    IdentificadorTipoDoacao: 4,
+    Quantidade: 8
+  }
+]
+
+=== 4.7 Extra: número de coletas realizadas por coletor ===
+[
+  {
+    totalColetas: 2,
+    Coletor: 'Rafael Martins'
+  },
+  {
+    totalColetas: 2,
+    Coletor: 'Beatriz Nogueira'
+  },
+  {
+    totalColetas: 1,
+    Coletor: 'Thiago Ribeiro'
+  }
+]

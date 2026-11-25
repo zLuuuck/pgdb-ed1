@@ -1,13 +1,10 @@
 // Exercício Prático 2 - PBD 2026/2 - MongoDB
 // Aluno: Lucas Toterol Rodrigues
-// Executar no mongosh:  mongosh --file exercicio_pratico_2.js
-// (ou colar bloco a bloco no shell)
+// Executado no VS Code via extensão do mongodb; executado no mongodb atlas
 
 use("utp_pbd");
 
-// ---------------------------------------------------------------
 // Questão 1: Coleção STOCKS
-// ---------------------------------------------------------------
 db.STOCKS.drop();
 
 db.STOCKS.insertMany([
@@ -216,9 +213,7 @@ db.STOCKS.insertMany([
 print("Q1 - documentos em STOCKS: " + db.STOCKS.countDocuments());
 printjson(db.STOCKS.find({}, { _id: 0 }).limit(3).toArray());
 
-// ---------------------------------------------------------------
 // Questão 2: Coleção WALLET
-// ---------------------------------------------------------------
 db.WALLET.drop();
 
 db.WALLET.insertMany([
@@ -240,9 +235,7 @@ db.WALLET.insertMany([
 print("Q2 - documentos em WALLET: " + db.WALLET.countDocuments());
 printjson(db.WALLET.find({}, { _id: 0 }).toArray());
 
-// ---------------------------------------------------------------
 // Questão 3: Valor total da carteira por cliente (quantity * price)
-// ---------------------------------------------------------------
 print("Q3 - valor total da carteira por cliente");
 printjson(
   db.WALLET.aggregate([
@@ -263,9 +256,7 @@ printjson(
   ]).toArray(),
 );
 
-// ---------------------------------------------------------------
 // Questão 4: $lookup entre WALLET e STOCKS (equivalente ao JOIN)
-// ---------------------------------------------------------------
 print("Q4 - WALLET JOIN STOCKS via $lookup");
 printjson(
   db.WALLET.aggregate([
@@ -296,11 +287,7 @@ printjson(
   ]).toArray(),
 );
 
-// ---------------------------------------------------------------
 // Questão 5: Pipeline com várias etapas (coleção STOCKS)
-// Ações com volume acima de 5 milhões, calcula variação % do dia
-// e amplitude, ordena pela maior variação e traz o top 5.
-// ---------------------------------------------------------------
 print("Q5 - pipeline: top 5 maiores variacoes do dia (volume > 5 mi)");
 printjson(
   db.STOCKS.aggregate([
