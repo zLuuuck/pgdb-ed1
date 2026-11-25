@@ -330,232 +330,211 @@ db.Coleta.insertMany([
 // 4. CONSULTAS
 
 // 4.1 Dados de COLETA com endereços (coletor, local de retirada e local de entrega)
-print("\n=== 4.1 Dados de COLETA com endereços (coletor, local de retirada e local de entrega) ===");
-printjson(
-  db.Coleta.aggregate([
-    {
-      $lookup: {
-        from: "Doacao",
-        localField: "_id.IdentificadorDoacao",
-        foreignField: "_id",
-        as: "doacao",
-      },
+db.Coleta.aggregate([
+  {
+    $lookup: {
+      from: "Doacao",
+      localField: "_id.IdentificadorDoacao",
+      foreignField: "_id",
+      as: "doacao",
     },
-    { $unwind: "$doacao" },
-    {
-      $lookup: {
-        from: "NecessidadeDoacao",
-        localField: "_id.IdentificadorNecessidade",
-        foreignField: "_id",
-        as: "necessidade",
-      },
+  },
+  { $unwind: "$doacao" },
+  {
+    $lookup: {
+      from: "NecessidadeDoacao",
+      localField: "_id.IdentificadorNecessidade",
+      foreignField: "_id",
+      as: "necessidade",
     },
-    { $unwind: "$necessidade" },
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "doacao.IdentificadorUsuario",
-        foreignField: "_id",
-        as: "doador",
-      },
+  },
+  { $unwind: "$necessidade" },
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "doacao.IdentificadorUsuario",
+      foreignField: "_id",
+      as: "doador",
     },
-    { $unwind: "$doador" },
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "necessidade.IdentificadorUsuario",
-        foreignField: "_id",
-        as: "recebedor",
-      },
+  },
+  { $unwind: "$doador" },
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "necessidade.IdentificadorUsuario",
+      foreignField: "_id",
+      as: "recebedor",
     },
-    { $unwind: "$recebedor" },
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "IdentificadorUsuario",
-        foreignField: "_id",
-        as: "coletor",
-      },
+  },
+  { $unwind: "$recebedor" },
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "IdentificadorUsuario",
+      foreignField: "_id",
+      as: "coletor",
     },
-    { $unwind: "$coletor" },
-    {
-      $project: {
-        _id: 0,
-        IdentificadorNecessidade: "$_id.IdentificadorNecessidade",
-        IdentificadorDoacao: "$_id.IdentificadorDoacao",
-        Coletor: "$coletor.Nome",
-        TelefoneColetor: "$coletor.Phone",
-        DataColeta: 1,
-        DataEntrega: 1,
-        Retirada: {
-          Doador: "$doador.Nome",
-          Endereco: "$doador.Endereco",
-        },
-        Entrega: {
-          Recebedor: "$recebedor.Nome",
-          Endereco: "$recebedor.Endereco",
-        },
-      },
-    },
-    { $sort: { DataColeta: 1 } },
-  ]).toArray(),
-);
-
-// 4.2 Dados de NECESSIDADE de doação incluindo endereços
-print("\n=== 4.2 Dados de NECESSIDADE de doação incluindo endereços ===");
-printjson(
-  db.NecessidadeDoacao.aggregate([
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "IdentificadorUsuario",
-        foreignField: "_id",
-        as: "recebedor",
-      },
-    },
-    { $unwind: "$recebedor" },
-    {
-      $lookup: {
-        from: "TipoDoacao",
-        localField: "IdentificadorTipoDoacao",
-        foreignField: "_id",
-        as: "tipo",
-      },
-    },
-    { $unwind: "$tipo" },
-    {
-      $project: {
-        _id: 1,
-        Data: 1,
-        Descricao: 1,
-        Quantidade: 1,
-        TipoDoacao: "$tipo.Descricao",
-        Recebedor: "$recebedor.Nome",
-        Phone: "$recebedor.Phone",
-        Endereco: "$recebedor.Endereco",
-        Coordenadas: "$recebedor.Coordenadas",
-      },
-    },
-    { $sort: { Data: 1 } },
-  ]).toArray(),
-);
-
-// 4.3 Dados de DOAÇÃO incluindo endereços
-print("\n=== 4.3 Dados de DOAÇÃO incluindo endereços ===");
-printjson(
-  db.Doacao.aggregate([
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "IdentificadorUsuario",
-        foreignField: "_id",
-        as: "doador",
-      },
-    },
-    { $unwind: "$doador" },
-    {
-      $lookup: {
-        from: "TipoDoacao",
-        localField: "IdentificadorTipoDoacao",
-        foreignField: "_id",
-        as: "tipo",
-      },
-    },
-    { $unwind: "$tipo" },
-    {
-      $project: {
-        _id: 1,
-        Data: 1,
-        Descricao: 1,
-        Quantidade: 1,
-        TipoDoacao: "$tipo.Descricao",
-        Doador: "$doador.Nome",
-        Phone: "$doador.Phone",
-        Endereco: "$doador.Endereco",
-        Coordenadas: "$doador.Coordenadas",
-      },
-    },
-    { $sort: { Data: 1 } },
-  ]).toArray(),
-);
-
-// 4.4 Extra: quantidade total doada e necessitada por tipo de doação
-print("\n=== 4.4 Extra: quantidade total doada e necessitada por tipo de doação ===");
-printjson(
-  db.TipoDoacao.aggregate([
-    {
-      $lookup: {
-        from: "Doacao",
-        localField: "_id",
-        foreignField: "IdentificadorTipoDoacao",
-        as: "doacoes",
-      },
-    },
-    {
-      $lookup: {
-        from: "NecessidadeDoacao",
-        localField: "_id",
-        foreignField: "IdentificadorTipoDoacao",
-        as: "necessidades",
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-        TipoDoacao: "$Descricao",
-        TotalDoado: { $sum: "$doacoes.Quantidade" },
-        TotalNecessario: { $sum: "$necessidades.Quantidade" },
-      },
-    },
-  ]).toArray(),
-);
-
-// 4.5 Extra: coletas pendentes de entrega (retiradas, mas ainda não entregues)
-print("\n=== 4.5 Extra: coletas pendentes de entrega (retiradas, mas ainda não entregues) ===");
-printjson(
-  db.Coleta.find(
-    { DataEntrega: null },
-    {
-      _id: 1,
-      IdentificadorUsuario: 1,
+  },
+  { $unwind: "$coletor" },
+  {
+    $project: {
+      _id: 0,
+      IdentificadorNecessidade: "$_id.IdentificadorNecessidade",
+      IdentificadorDoacao: "$_id.IdentificadorDoacao",
+      Coletor: "$coletor.Nome",
+      TelefoneColetor: "$coletor.Phone",
       DataColeta: 1,
       DataEntrega: 1,
+      Retirada: {
+        Doador: "$doador.Nome",
+        Endereco: "$doador.Endereco",
+      },
+      Entrega: {
+        Recebedor: "$recebedor.Nome",
+        Endereco: "$recebedor.Endereco",
+      },
     },
-  ).toArray(),
+  },
+  { $sort: { DataColeta: 1 } },
+]);
+
+// 4.2 Dados de NECESSIDADE de doação incluindo endereços
+db.NecessidadeDoacao.aggregate([
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "IdentificadorUsuario",
+      foreignField: "_id",
+      as: "recebedor",
+    },
+  },
+  { $unwind: "$recebedor" },
+  {
+    $lookup: {
+      from: "TipoDoacao",
+      localField: "IdentificadorTipoDoacao",
+      foreignField: "_id",
+      as: "tipo",
+    },
+  },
+  { $unwind: "$tipo" },
+  {
+    $project: {
+      _id: 1,
+      Data: 1,
+      Descricao: 1,
+      Quantidade: 1,
+      TipoDoacao: "$tipo.Descricao",
+      Recebedor: "$recebedor.Nome",
+      Phone: "$recebedor.Phone",
+      Endereco: "$recebedor.Endereco",
+      Coordenadas: "$recebedor.Coordenadas",
+    },
+  },
+  { $sort: { Data: 1 } },
+]);
+
+// 4.3 Dados de DOAÇÃO incluindo endereços
+db.Doacao.aggregate([
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "IdentificadorUsuario",
+      foreignField: "_id",
+      as: "doador",
+    },
+  },
+  { $unwind: "$doador" },
+  {
+    $lookup: {
+      from: "TipoDoacao",
+      localField: "IdentificadorTipoDoacao",
+      foreignField: "_id",
+      as: "tipo",
+    },
+  },
+  { $unwind: "$tipo" },
+  {
+    $project: {
+      _id: 1,
+      Data: 1,
+      Descricao: 1,
+      Quantidade: 1,
+      TipoDoacao: "$tipo.Descricao",
+      Doador: "$doador.Nome",
+      Phone: "$doador.Phone",
+      Endereco: "$doador.Endereco",
+      Coordenadas: "$doador.Coordenadas",
+    },
+  },
+  { $sort: { Data: 1 } },
+]);
+
+// 4.4 Extra: quantidade total doada e necessitada por tipo de doação
+db.TipoDoacao.aggregate([
+  {
+    $lookup: {
+      from: "Doacao",
+      localField: "_id",
+      foreignField: "IdentificadorTipoDoacao",
+      as: "doacoes",
+    },
+  },
+  {
+    $lookup: {
+      from: "NecessidadeDoacao",
+      localField: "_id",
+      foreignField: "IdentificadorTipoDoacao",
+      as: "necessidades",
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      TipoDoacao: "$Descricao",
+      TotalDoado: { $sum: "$doacoes.Quantidade" },
+      TotalNecessario: { $sum: "$necessidades.Quantidade" },
+    },
+  },
+]);
+
+// 4.5 Extra: coletas pendentes de entrega (retiradas, mas ainda não entregues)
+db.Coleta.find(
+  { DataEntrega: null },
+  {
+    _id: 1,
+    IdentificadorUsuario: 1,
+    DataColeta: 1,
+    DataEntrega: 1,
+  },
 );
 
 // 4.6 Extra: necessidades ainda sem coleta registrada
-print("\n=== 4.6 Extra: necessidades ainda sem coleta registrada ===");
-printjson(
-  db.NecessidadeDoacao.aggregate([
-    {
-      $lookup: {
-        from: "Coleta",
-        localField: "_id",
-        foreignField: "_id.IdentificadorNecessidade",
-        as: "coletas",
-      },
+db.NecessidadeDoacao.aggregate([
+  {
+    $lookup: {
+      from: "Coleta",
+      localField: "_id",
+      foreignField: "_id.IdentificadorNecessidade",
+      as: "coletas",
     },
-    { $match: { coletas: { $size: 0 } } },
-    { $project: { coletas: 0 } },
-  ]).toArray(),
-);
+  },
+  { $match: { coletas: { $size: 0 } } },
+  { $project: { coletas: 0 } },
+]);
 
 // 4.7 Extra: número de coletas realizadas por coletor
-print("\n=== 4.7 Extra: número de coletas realizadas por coletor ===");
-printjson(
-  db.Coleta.aggregate([
-    { $group: { _id: "$IdentificadorUsuario", totalColetas: { $sum: 1 } } },
-    {
-      $lookup: {
-        from: "Usuarios",
-        localField: "_id",
-        foreignField: "_id",
-        as: "coletor",
-      },
+db.Coleta.aggregate([
+  { $group: { _id: "$IdentificadorUsuario", totalColetas: { $sum: 1 } } },
+  {
+    $lookup: {
+      from: "Usuarios",
+      localField: "_id",
+      foreignField: "_id",
+      as: "coletor",
     },
-    { $unwind: "$coletor" },
-    { $project: { _id: 0, Coletor: "$coletor.Nome", totalColetas: 1 } },
-    { $sort: { totalColetas: -1 } },
-  ]).toArray(),
-);
+  },
+  { $unwind: "$coletor" },
+  { $project: { _id: 0, Coletor: "$coletor.Nome", totalColetas: 1 } },
+  { $sort: { totalColetas: -1 } },
+]);
